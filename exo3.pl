@@ -1,5 +1,7 @@
 #!usr/bin/perl -w 
 
+# exo 3 Trinome : Amiot Tanguy | Chaouche Zineb | Singh Jaswinder
+
 sub ecritureContenuDossier{
 	my ($dossier,$fichierDat)=@_;
 	$contenuDossier="";		
@@ -9,8 +11,13 @@ sub ecritureContenuDossier{
 	}
 	chomp($contenuDossier);
 	closedir $dh;
-	open (FICHIER, ">fichier.dat") || die ("Vous ne pouvez pas créer le fichier \"fichier.dat\"");
+	open (FICHIER, ">$fichierDat") || die ("Vous ne pouvez pas créer le fichier \"fichier.dat\"");
 	print FICHIER $contenuDossier;
 	close (FICHIER);
+	print "le fichier $fichierDat a été crée";
 }
-ecritureContenuDossier("/home/jas","fichier.dat");
+
+#fonction prenant en paramètre le repertoire du dossier 
+# ainsi que le nom du fichier(existant ou nouveau nom) dans le quel on veut écrire le contenu de ce dossier
+ecritureContenuDossier("/home/jas/tpNote","fichier.dat");
+
