@@ -1,6 +1,6 @@
 #!usr/bin/perl -w
 
-#exo 2 Trinome : Amiot Tanguy | Chaouche Zined | Singh Jaswinder
+#exo 2 Trinome : Amiot Tanguy | Chaouche Zineb | Singh Jaswinder
 
 $path = "/etc/passwd";
 open(Fic,'<',$path) or die $!;
@@ -17,7 +17,7 @@ while(<Fic>){
 }
 
 #accès au fichier group pour récuperer le nm du groupe associé a son gid
-#création d'une liste associative associant le gid au group
+#création d'une liste associative associant le gid au groupe
 %listGroup=();
 while(<Fic2>){
         chomp;
