@@ -39,29 +39,6 @@ my %mois = (
     Dec => "decembre",
 );
 
-my %NumMono = (
-    1 => "01",
-    2 => "02",
-    3 => "03",
-    4 => "04",
-    5 => "05",
-    6 => "06",
-    7 => "07",
-    8 => "08",
-    9 => "09",
-    0 => "00",
-);
-
-
-sub chiffreEnString{
-	my ($chiffre) = @_;
-	foreach $nb (keys %NumMono){
-		if($chiffre eq $nb){
-		   return $NumMono{$nb};
-		}	
-	}
-	return $chiffre;	
-}
 
 foreach $e (@liste){
 	$e = replace("-","",$e);
@@ -90,13 +67,12 @@ foreach $ele (sort keys %nouvelleListe){
 			my @tabUn = split(",",$l);
 			my $indice = 0;
 			$temps=0;
-			$valKeyUn=int($tabUn[0])+int($tabUn[1]*30); 
-			$cleUne="$ele $valKeyUn";
-			
+			#$testing=int($tabUn[0])+int($tabUn[1]*30);
+			$cleUne="$ele/$tabUn[0]/$tabUn[1]";
+
 			foreach $m (@{$nouvelleListe{$ele}}){
 				my @tabDeux= split(",",$m);
-				$valKey=int($tabDeux[0])+int($tabDeux[1]*30);	
-				$cleDeux="$ele $valKey";
+				$cleDeux="$ele/$tabDeux[0]/$tabDeux[1]";
 				if($cleUne eq $cleDeux){
 					$indice++;
 					$temps+=$tabDeux[5];
@@ -105,19 +81,16 @@ foreach $ele (sort keys %nouvelleListe){
 			}
 			$heure = int($temps/60);
 			$min = $temps % 60;
-			$heure= chiffreEnString($heure);
- 			$min = chiffreEnString($min);
-			$finalArray{$cleUne}=" $tabUn[0] $tabUn[2] $heure:$min ($indice fois)";
-			
+			if(!exists($$finalArray{$cleUne})){
+				$finalArray{$cleUne}=" $tabUn[0] $tabUn[2] $heure:$min ($indice fois)";
+			}
 		}
-
-		foreach $val (reverse sort keys %finalArray){
-			@id= split(" ",$val);
+		foreach $val (sort keys %finalArray){
+			@id= split("/",$val);
 			if($id[0] eq $ele){
 				print "$finalArray{$val}\n";
 			}
 		}
 	print "\n";
 }
-
 
