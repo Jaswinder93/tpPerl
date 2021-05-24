@@ -1,6 +1,7 @@
 #!usr/bin/perl -w 
 
 # exo 3 Trinome : Amiot Tanguy | Chaouche Zineb | Singh Jaswinder
+use Cwd;
 
 sub ecritureContenuDossier{
 	my ($dossier,$fichierDat)=@_;
@@ -19,5 +20,6 @@ sub ecritureContenuDossier{
 
 #fonction prenant en paramètre le repertoire du dossier 
 # ainsi que le nom du fichier(existant ou nouveau nom) dans le quel on veut écrire le contenu de ce dossier
-ecritureContenuDossier("/home/jas/tpNote","fichier.dat");
+my $rep = getcwd;
+ecritureContenuDossier($rep,"fichier.dat");
 

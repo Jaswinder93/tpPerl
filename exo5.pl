@@ -72,7 +72,8 @@ foreach $e (@liste){
 		my @motsSplits=split(/\s+/,$e);
 		# On ne traite pas reboot et la connexion courante
 		if(!($motsSplits[0]=~/(?:reboot|wtmp)$/)){
-			if($motsSplits[7] ne "still"){
+			if(!($motsSplits[7] =~/(?:still|gone|crash)$/)){
+				if($motsSplits[6] ne "down"){
 				#extraction des informations que l'on a besoin
 				my($login,$terminal,$ip,$dayName,$month,$numDay,$hourBegin,$hourEnd,$timeSpend)=@motsSplits;
 				$monthNum= $moisNum{$month};
@@ -82,6 +83,7 @@ foreach $e (@liste){
 				#récuperation du temps en minutes
 				$timeInMin = $hour*60+$minute;
 				push @ {$nouvelleListe{$login}},"$numDay,$monthNum,$month,$hour,$minute,$timeInMin";		
+				}			
 			}
 		}
 	}
