@@ -1,5 +1,7 @@
 #!usr/bin/perl -w
 
+#exo 2 Trinome : Amiot Tanguy | Chaouche Zined | Singh Jaswinder
+
 $path = "/etc/passwd";
 open(Fic,'<',$path) or die $!;
 $pathgroup="/etc/group";
@@ -14,7 +16,7 @@ while(<Fic>){
 	$tableauFinal{$login}="@liste";
 }
 
-#accès au fichier group
+#accès au fichier group pour récuperer le nm du groupe associé a son gid
 #création d'une liste associative associant le gid au group
 %listGroup=();
 while(<Fic2>){
@@ -28,7 +30,6 @@ while(<Fic2>){
 foreach $e (sort keys %tableauFinal){
 	if(defined($tableauFinal{$e})){
 		@newListe =split(" ", $tableauFinal{$e});
-		#print("$newListe[1]\n");
 		foreach $key (%listGroup){
 			if($key eq $newListe[1]){
 				push(@newListe,$listGroup{$key});				
